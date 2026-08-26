@@ -16,7 +16,7 @@ Combines your configured account and sales intelligence with Crossbeam's ecosyst
 ## What you need
 
 **Required**
-- **Crossbeam connector** — the ecosystem layer that makes this brief different from any single data source. Connect from the Claude connector directory or at crossbeam.com. Make sure you're authenticated to the right org before running.
+- **Crossbeam connector** — the ecosystem layer that makes this brief different from any single data source. Connect from your tool's connector directory or at crossbeam.com. Make sure you're authenticated to the right org before running.
 
 **Optional but recommended**
 Crossbeam's ecosystem intelligence and signals become even more valuable when layered with your account intelligence and sales intelligence tools. It notes what wasn't configured so you know where the brief has gaps.
@@ -24,10 +24,10 @@ Crossbeam's ecosystem intelligence and signals become even more valuable when la
 ## Setup: what to configure before your first run
 
 **Step 1 — Connect your sources**
-Connect the tools your team uses from the Claude connector directory. Start with what you have. If you're unsure what's connected or how to add something, just ask Claude.
+Connect the tools your team uses from your tool's connector directory. Start with what you have. If you're unsure what's connected or how to add something, just ask your assistant.
 
 **Step 2 — Define your configured sources**
-Decide which sources you want included in every brief and fill them into the Configuration section of this skill under "Configured sources." These become your defaults — Claude will use them without asking each time.
+Decide which sources you want included in every brief and fill them into the Configuration section of this skill under "Configured sources." These become your defaults — your assistant will use them without asking each time.
 
 > **Fill in before sharing:** `Configured sources: [list your sources here]`
 
@@ -41,10 +41,10 @@ If you want the brief to focus on specific partners — Tier 1s, active co-sell 
 Tags need to match what's already applied in Crossbeam. If left blank, the brief surfaces all ecosystem relationships with no filter.
 
 **Step 4 — Customize the brief template (optional)**
-The brief template in Step 5 is a starting point. Remove sections that don't apply to your team, rename fields to match your product, and fill in `[your product]` wherever it appears. Ask Claude to help you adapt it.
+The brief template in Step 5 is a starting point. Remove sections that don't apply to your team, rename fields to match your product, and fill in `[your product]` wherever it appears. Ask your assistant to help you adapt it.
 
 **Step 5 — Run it once and adjust**
-After your first run, ask Claude to help you refine any sections based on what was most useful.
+After your first run, ask your assistant to help you refine any sections based on what was most useful.
 
 ## How to run it
 
@@ -59,16 +59,16 @@ After your first run, ask Claude to help you refine any sections based on what w
 - **Partner contact details:** partner owner contact information exists in Crossbeam but is not surfaced directly in the brief. Where an ecosystem signal suggests a partner play, the brief recommends looping in your partnerships lead, who holds the relationship context and can make the right introduction.
 - **Missing sources:** the brief notes what wasn't configured rather than failing.
 - **No ecosystem relationships found:** normal for some accounts. The brief notes it clearly.
-- **One-off lookups** aren't what this skill is for — ask Claude to query your source directly.
+- **One-off lookups** aren't what this skill is for — ask your assistant to query your source directly.
 
 ## Not sure how to set something up?
 
-Just ask Claude — it can walk you through connecting tools, finding your Crossbeam partner tags, or adapting the brief template for your team.
+Just ask your assistant — it can walk you through connecting tools, finding your Crossbeam partner tags, or adapting the brief template for your team.
 
 ## Related
 
 - **Meeting prep** — if you have a specific upcoming meeting with known attendees, and you have a meeting-prep skill installed, use that instead.
-- **One-off lookups** — ask Claude to query your source directly for time-windowed or count-bounded requests.
+- **One-off lookups** — ask your assistant to query your source directly for time-windowed or count-bounded requests.
 
 ## A note on the data
 
@@ -89,7 +89,7 @@ Produces a structured account brief by combining configured data sources with Cr
 ---
 
 ## Configuration
-> These values are set once by whoever deploys this skill. Claude reads them at runtime — do not change them mid-conversation.
+> These values are set once by whoever deploys this skill. The agent reads them at runtime — do not change them mid-conversation.
 
 **Configured sources:** [list your sources here]
 

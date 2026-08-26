@@ -33,7 +33,7 @@ Read-only and draft-only. The list and drafts are produced for you to review; th
 ## What you need
 
 **Required**
-- **Crossbeam connector** — the source of partner overlap and contact data. Connect from the Claude connector directory or at crossbeam.com. Authenticate to the right org first. The skill will not run without it.
+- **Crossbeam connector** — the source of partner overlap and contact data. Connect from your tool's connector directory or at crossbeam.com. Authenticate to the right org first. The skill will not run without it.
 
 **For the prospect population — any one of these works**
 - A description ("my whole prospect base", "enterprise prospects in DACH", "accounts in my territory")
@@ -123,7 +123,7 @@ Implements ELG plays P7, P8, P11, and P12. Play records and the foundations subs
 - **Signal-triggered outbound (P12)** — alert on new ecosystem signals: Step 8 (degrades gracefully if the signal tool is absent).
 
 ## Configuration
-> Set once by whoever deploys this skill. Claude reads these at runtime — do not change them mid-conversation.
+> Set once by whoever deploys this skill. The agent reads these at runtime — do not change them mid-conversation.
 
 **Prospect source:** [fill in — CRM filter, warehouse query, Crossbeam prospect population, or "user will paste"]
 **ICP:** [fill in — what a good-fit account looks like]

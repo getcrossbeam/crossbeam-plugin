@@ -32,7 +32,7 @@ Read-only and draft-only. Nothing is sent; you review every draft and the actual
 ## What you need
 
 **Required**
-- **Crossbeam connector** — the source of partner position, contacts, and activity. Connect from the Claude connector directory or at crossbeam.com. Authenticate to the right org before running. The skill will not run without it.
+- **Crossbeam connector** — the source of partner position, contacts, and activity. Connect from your tool's connector directory or at crossbeam.com. Authenticate to the right org before running. The skill will not run without it.
 
 **For the accounts or deals — any one of these works**
 - A specific account or deal named in your request ("who can help me win [Account]", "help me on the [Account] deal")
@@ -96,7 +96,7 @@ Where give-and-get balance per partner lives, if anywhere. Leave blank if not tr
 
 ## Setting it up as a recurring run
 
-Works well as a weekly pass over open pipeline, or fed an at-risk list from your forecast tool. Ask Claude to schedule it after a clean manual run.
+Works well as a weekly pass over open pipeline, or fed an at-risk list from your forecast tool. Ask your assistant to schedule it after a clean manual run.
 
 ## A note on the data
 
@@ -132,7 +132,7 @@ How the plays map to the play classification in Step 3:
 - The reciprocal give is the AMM reciprocal cell — reciprocal influence on, or a lead into, one of your customers the partner wants — **P25**.
 
 ## Configuration
-> Set once by whoever deploys this skill. Claude reads these at runtime — do not change them mid-conversation.
+> Set once by whoever deploys this skill. The agent reads these at runtime — do not change them mid-conversation.
 
 **Account or deal source:** [fill in — CRM report/filter, warehouse query, or "user will paste"]
 **Buying center (optional):** [fill in — roles that make a complete buying committee for your sale]

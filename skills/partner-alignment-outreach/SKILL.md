@@ -21,7 +21,7 @@ Nothing is sent automatically. You review every draft before it goes anywhere.
 ## What you need
 
 **Required**
-- **Crossbeam connector** — connect it from the Claude connector directory or at crossbeam.com. The skill won't run without it. Make sure you're authenticated to the right org before starting.
+- **Crossbeam connector** — connect it from your tool's connector directory or at crossbeam.com. The skill won't run without it. Make sure you're authenticated to the right org before starting.
 
 **At least one of these (for pulling deals)**
 - Salesforce connector
@@ -94,7 +94,7 @@ Mix and match any of these in a single request.
 
 ## Setting it up as a recurring run
 
-Once you've run it once and are happy with the output, ask Claude to schedule it as a weekly task (e.g., Monday mornings to catch the prior week's wins).
+Once you've run it once and are happy with the output, ask your assistant to schedule it as a weekly task (e.g., Monday mornings to catch the prior week's wins).
 
 ## A note on the data
 
@@ -102,7 +102,7 @@ All overlap data comes from what your partners have chosen to share with you in 
 
 ## Not sure how to set something up?
 
-If you're unsure how to connect a tool, find your Crossbeam partner tags, or adapt the defaults for your team's workflow, just ask Claude — it can walk you through any of it.
+If you're unsure how to connect a tool, find your Crossbeam partner tags, or adapt the defaults for your team's workflow, just ask your assistant — it can walk you through any of it.
 
 </readme>
 
@@ -153,7 +153,7 @@ Apply these unless the user specifies otherwise.
 
 Check what's connected before starting. Three things matter:
 
-1. **Crossbeam MCP** (required). Look for tools whose names contain `find_overlap_partners`, `find_overlaps`, `get_account_context`, `find_partner_contacts`, `get_ecosystem_activity`, or `get_partner_sharing_status` (used in Step 2 to confirm the partnership is active; optional, skip the check if absent). The tool-name prefix varies per installation — match on these suffixes, and confirm the actual surface on the first call, since tool sets differ between installs. If no Crossbeam MCP is connected, stop and tell the user to connect the Crossbeam connector (available in the Claude connector directory or at crossbeam.com) and authenticate before running — nothing else in this skill works without it. Do not proceed past this step until Crossbeam is confirmed connected.
+1. **Crossbeam MCP** (required). Look for tools whose names contain `find_overlap_partners`, `find_overlaps`, `get_account_context`, `find_partner_contacts`, `get_ecosystem_activity`, or `get_partner_sharing_status` (used in Step 2 to confirm the partnership is active; optional, skip the check if absent). The tool-name prefix varies per installation — match on these suffixes, and confirm the actual surface on the first call, since tool sets differ between installs. If no Crossbeam MCP is connected, stop and tell the user to connect the Crossbeam connector (available in your tool's connector directory or at crossbeam.com) and authenticate before running — nothing else in this skill works without it. Do not proceed past this step until Crossbeam is confirmed connected.
 2. **A deal source** (flexible). A Salesforce/HubSpot CRM connector, a Snowflake or other warehouse connector, or nothing — in which case ask the user to paste their recent closed-won deals.
 3. **An email connector** (optional). Gmail or Outlook tools that can create drafts (names like `create_draft`). If present, use it to create drafts in the user's inbox. If absent, deliver drafts as formatted text instead.
 

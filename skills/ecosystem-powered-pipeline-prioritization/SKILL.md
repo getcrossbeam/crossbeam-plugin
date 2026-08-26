@@ -30,7 +30,7 @@ An account that scores high on intent but also has three partners with active de
 ## What you need
 
 **Required**
-- **Crossbeam connector** — the source of ecosystem intelligence and signals. Connect from the Claude connector directory or at crossbeam.com. Make sure you're authenticated to the right org before running.
+- **Crossbeam connector** — the source of ecosystem intelligence and signals. Connect from your tool's connector directory or at crossbeam.com. Make sure you're authenticated to the right org before running.
 
 **Required — account source**
 You need a list of accounts to scan. Configure where that list comes from in the skill's Configuration section before running.
@@ -63,10 +63,10 @@ Crossbeam Ecosystem Signals stand on their own — real partner deal activity is
 ## Setup: what to configure before your first run
 
 **Step 1 — Connect Crossbeam**
-Connect from the Claude connector directory or at crossbeam.com. Authenticate to the right org.
+Connect from your tool's connector directory or at crossbeam.com. Authenticate to the right org.
 
 **Step 2 — Define your account source**
-Fill in where your account list comes from and how it will be pulled. This is your starting list — Ecosystem Signals layer on top to show which accounts have active partner motion. Be specific: name the source, the segment or filter you're using, and how Claude should access it (e.g. via a connected CRM connector, a manual CSV upload, a named account list you'll paste in).
+Fill in where your account list comes from and how it will be pulled. This is your starting list — Ecosystem Signals layer on top to show which accounts have active partner motion. Be specific: name the source, the segment or filter you're using, and how the agent should access it (e.g. via a connected CRM connector, a manual CSV upload, a named account list you'll paste in).
 
 > **Fill in before sharing:** `Account source: [e.g. "Open opportunities in Salesforce, Enterprise segment, pulled via Salesforce connector" or "Top 300 prospect accounts — will paste as a list" or "Named account list uploaded as CSV"]`
 
@@ -91,7 +91,7 @@ If your account list is large, this sets the point at which the scanner pauses a
 > **Fill in before sharing:** `Volume confirmation threshold: [e.g. 100 accounts — or leave blank for no limit]`
 
 **Step 7 — Run it once and adjust**
-After a first run, ask Claude to help you refine the scoring weights, change the lookback window, or trim the output format to what your team actually reads.
+After a first run, ask your assistant to help you refine the scoring weights, change the lookback window, or trim the output format to what your team actually reads.
 
 ## How to run it
 
@@ -111,7 +111,7 @@ After a first run, ask Claude to help you refine the scoring weights, change the
 
 ## Not sure how to set something up?
 
-Just ask Claude — it can walk you through connecting tools, finding your Crossbeam partner tags, setting up a scheduled run, or adapting the output format.
+Just ask your assistant — it can walk you through connecting tools, finding your Crossbeam partner tags, setting up a scheduled run, or adapting the output format.
 
 
 
@@ -134,9 +134,9 @@ Scans a configured list of accounts against Crossbeam's ecosystem intelligence a
 ---
 
 ## Configuration
-> These values are set once by whoever deploys this skill. Claude reads them at runtime — do not change them mid-conversation.
+> These values are set once by whoever deploys this skill. The agent reads them at runtime — do not change them mid-conversation.
 
-**Account source:** [fill in — name the source, the segment or filter, and how Claude should access it. e.g. "My open opportunities, Enterprise segment" or "Top 300 prospect accounts" or "Named account list"]
+**Account source:** [fill in — name the source, the segment or filter, and how the agent should access it. e.g. "My open opportunities, Enterprise segment" or "Top 300 prospect accounts" or "Named account list"]
 
 **Signal lookback window:** [fill in — how far back to look for partner activity. e.g. 30 days / 60 days / 90 days]
 
@@ -144,7 +144,7 @@ Scans a configured list of accounts against Crossbeam's ecosystem intelligence a
 
 **Output destination:** [fill in — e.g. in-chat / Slack channel / Google Doc / slide deck / other]
 
-**Volume confirmation threshold (optional):** [fill in — e.g. 100 accounts. Claude pauses and confirms before scanning if the list exceeds this. Leave blank for no limit.]
+**Volume confirmation threshold (optional):** [fill in — e.g. 100 accounts. The agent pauses and confirms before scanning if the list exceeds this. Leave blank for no limit.]
 
 ---
 
