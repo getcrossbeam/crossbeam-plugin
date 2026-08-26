@@ -295,7 +295,7 @@ For each account in the ranked output, generate a suggested outreach angle based
 - What the entry point is for this account given those signals (e.g. reach out now before the stack solidifies, reference the shared partner relationship as context)
 - What to avoid (e.g. don't mention specific partner deal details — you're not supposed to know the specifics, only that there's activity)
 
-Keep angles to 2–3 sentences. These are talking points, not drafted messages. If the user wants a drafted message, route them to the Ecosystem-Informed Outreach Writer skill (or any outreach-drafting skill they have installed).
+Keep angles to 2–3 sentences. These are talking points, not drafted messages. If the user wants a drafted message, route them to any outreach-drafting skill they have installed.
 
 Note on every outreach angle: confirm with your partnerships lead before engaging — they'll know if there's already a motion in place and can help frame the approach.
 
