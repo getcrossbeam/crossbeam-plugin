@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "crossbeam-plugin",
+  "displayName": "Crossbeam",
+  "description": "Claude Skills that turn live Crossbeam partner data into revenue workflows: co-sell plays, ecosystem-qualified prospecting, account briefs, pipeline prioritization, and partner outreach. Requires the Crossbeam MCP server.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Crossbeam",
+    "url": "https://www.crossbeam.com/"
+  },
+  "homepage": "https://www.crossbeam.com/skills",
+  "repository": "https://github.com/getcrossbeam/crossbeam-plugin",
+  "license": "MIT",
+  "keywords": [
+    "crossbeam",
+    "partnerships",
+    "ecosystem-led-growth",
+    "elg",
+    "co-sell",
+    "go-to-market",
+    "sales",
+    "prospecting",
+    "partner-data"
+  ]
+}

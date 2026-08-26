@@ -1,0 +1,28 @@
+{
+  "name": "crossbeam",
+  "description": "Crossbeam's Claude Skills for partnership and go-to-market teams: partner overlap, co-sell context, and ecosystem signals brought into revenue workflows.",
+  "owner": {
+    "name": "Crossbeam",
+    "url": "https://www.crossbeam.com/"
+  },
+  "plugins": [
+    {
+      "name": "crossbeam-plugin",
+      "displayName": "Crossbeam",
+      "source": "./",
+      "description": "Claude Skills that turn live Crossbeam partner data into revenue workflows: co-sell plays, ecosystem-qualified prospecting, account briefs, pipeline prioritization, and partner outreach. Requires the Crossbeam MCP server.",
+      "category": "productivity",
+      "keywords": [
+        "crossbeam",
+        "partnerships",
+        "ecosystem-led-growth",
+        "elg",
+        "co-sell",
+        "go-to-market",
+        "sales",
+        "prospecting",
+        "partner-data"
+      ]
+    }
+  ]
+}
