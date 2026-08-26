@@ -36,7 +36,7 @@ If your agent supports the plugin format, install all five at once:
 
 ```
 /plugin marketplace add getcrossbeam/crossbeam-plugin
-/plugin install crossbeam-plugin@crossbeam
+/plugin install crossbeam-plugin@crossbeam-plugin
 ```
 
 Restart your client and the skills are available in every session. Your agent picks the right one automatically based on what you ask. Use `/plugin` to browse or disable individual skills, and `claude plugin update crossbeam-plugin` to pull the latest version.
@@ -56,7 +56,7 @@ The Crossbeam MCP requirement below applies wherever you run them.
 
 ## Configure before you use
 
-**These skills will not run until you configure them.** Each one opens with a Configuration block of `[fill in ...]` placeholders: where your account or deal list comes from, your ICP, your exclusions, your product name. Until you fill those in, the skills are designed to stop and ask rather than guess at a source. That is correct behavior, not a bug, but it does mean a fresh install can look like it is refusing to work.
+**These skills will not run until you configure them.** Each one carries a Configuration section of bracketed placeholders: where your account or deal list comes from, your ICP, your exclusions, your product name. Four use `[fill in ...]`; Partner Alignment Outreach uses a defaults table of `[your default ...]` values instead. Until you fill those in, the skills are designed to stop and ask rather than guess at a source. That is correct behavior, not a bug, but it does mean a fresh install can look like it is refusing to work.
 
 Open the `SKILL.md` for each skill, fill in its Configuration block, and reinstall or reload before sharing with your team. Your assistant can help you work through the placeholders.
 
