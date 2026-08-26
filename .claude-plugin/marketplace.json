@@ -1,6 +1,6 @@
 {
   "name": "crossbeam",
-  "description": "Crossbeam's Claude Skills for partnership and go-to-market teams: partner overlap, co-sell context, and ecosystem signals brought into revenue workflows.",
+  "description": "Crossbeam's Skills for partnership and go-to-market teams: partner overlap, co-sell context, and ecosystem signals brought into revenue workflows.",
   "owner": {
     "name": "Crossbeam",
     "url": "https://www.crossbeam.com/"
@@ -10,7 +10,7 @@
       "name": "crossbeam-plugin",
       "displayName": "Crossbeam",
       "source": "./",
-      "description": "Claude Skills that turn live Crossbeam partner data into revenue workflows: co-sell plays, ecosystem-qualified prospecting, account briefs, pipeline prioritization, and partner outreach. Requires the Crossbeam MCP server.",
+      "description": "Skills that turn live Crossbeam partner data into revenue workflows: co-sell plays, ecosystem-qualified prospecting, account briefs, pipeline prioritization, and partner outreach. Requires the Crossbeam MCP server.",
       "category": "productivity",
       "keywords": [
         "crossbeam",
