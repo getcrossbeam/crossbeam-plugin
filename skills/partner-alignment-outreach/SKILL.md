@@ -29,8 +29,6 @@ Nothing is sent automatically. You review every draft before it goes anywhere.
 - Snowflake or warehouse connector
 - Or just paste a list of account names — the skill handles that too
 
-**Optional but recommended**
-- Gmail or Outlook connector — enables saving drafts directly to your inbox instead of copy-pasting
 
 ## Before your first run: two things to configure
 
@@ -118,7 +116,7 @@ If you're unsure how to connect a tool, find your Crossbeam partner tags, or ada
 
 When a deal closes, the partners who overlap on that account are the people who most want to know — and the ones most likely to return the favor. This skill turns a list of recent closed-won deals into one short, specific alignment email per deal, addressed to the right rep at the right partner.
 
-The flow: pull recent closed-won deals → for each deal, use Crossbeam to find the partner with the strongest position on that account and the rep who owns it → draft a concise alignment email → deliver as email drafts (never sent) plus a summary.
+The flow: pull recent closed-won deals → for each deal, use Crossbeam to find the partner with the strongest position on that account and the rep who owns it → draft a concise alignment email 
 
 ## Configuration
 
@@ -155,9 +153,7 @@ Check what's connected before starting. Three things matter:
 
 1. **Crossbeam MCP** (required). Look for tools whose names contain `find_overlap_partners`, `find_overlaps`, `get_account_context`, `find_partner_contacts`, `get_ecosystem_activity`, or `get_partner_sharing_status` (used in Step 2 to confirm the partnership is active; optional, skip the check if absent). The tool-name prefix varies per installation — match on these suffixes, and confirm the actual surface on the first call, since tool sets differ between installs. If no Crossbeam MCP is connected, stop and tell the user to connect the Crossbeam connector (available in your tool's connector directory or at crossbeam.com) and authenticate before running — nothing else in this skill works without it. Do not proceed past this step until Crossbeam is confirmed connected.
 2. **A deal source** (flexible). A Salesforce/HubSpot CRM connector, a Snowflake or other warehouse connector, or nothing — in which case ask the user to paste their recent closed-won deals.
-3. **An email connector** (optional). Gmail or Outlook tools that can create drafts (names like `create_draft`). If present, use it to create drafts in the user's inbox. If absent, deliver drafts as formatted text instead.
 
-Don't ask the user which tools they have — detect, then only ask if there's genuinely no way to get deals.
 
 ## Step 1 — Pull recent closed-won deals
 
@@ -242,8 +238,6 @@ Subject line — vary across the run, pick the most specific fit:
 - `We just closed [Account] — worth a quick sync?`
 - `[Account] is now a mutual customer`
 
-If the draft will become an HTML email, use `<br>` for line breaks; no `<html>` or `<body>` wrapper.
-
 ## Step 4 — De-AI pass (hard gate before delivery)
 
 Re-read every draft before it goes anywhere. This is a hard stop: no draft is delivered until it passes both checks.
@@ -253,7 +247,7 @@ Re-read every draft before it goes anywhere. This is a hard stop: no draft is de
 
 The test: would a busy rep read this and assume a human typed it between calls? If not, rewrite until yes.
 
-## Step 5 — Deliver the drafts
+## Step 5 — Create the drafts
 
 **Before creating any drafts — confirm recipients with the user.**
 Present a summary list of who will receive drafts:
@@ -261,25 +255,6 @@ Present a summary list of who will receive drafts:
 
 Ask the user to confirm before proceeding. If anything looks wrong — an unexpected recipient, a partner they don't recognize, a title that doesn't look like a rep — give them the opportunity to remove it from the run. Only create drafts after explicit confirmation.
 
-**What the gate blocks, precisely.** Creating drafts in Gmail/Outlook, or sending, is a hard stop: do not do it in the same turn as the confirmation, wait for the answer. Copy-ready text in chat is not a send, so you may show it in the same turn — but the recipient table must appear **above** the drafts so the user checks each address before copying. The volume guardrail is different and always blocks: if the qualifying count exceeds the threshold, report the count and stop, in chat or not. A blanket "I trust you, don't check with me" does not satisfy either gate; report the count and the recipients anyway.
-
-**If an email connector with draft creation is available:** create one draft per confirmed deal — recipient = partner rep's email, subject and body from Step 3. Adapt to the tool's actual parameter shape. Create drafts only; never send, even if a send tool exists. The whole point is that the user reviews before anything leaves.
-
-**If no email connector is detected:** before delivering drafts, ask the user how they'd like to receive them:
-- Connect Gmail or Outlook to save drafts directly to their inbox
-- Have the drafts generated as text they can copy into any tool
-- Have the drafts saved to another destination they specify
-
-Wait for their response before proceeding. If they choose to connect an email connector, pause and let them do so, then continue. If they choose text output, deliver all drafts in a single formatted block — one section per deal with recipient, subject, and body.
-
-## Step 6 — Report
-
-End with a compact summary:
-- Deals pulled / drafts created / deals skipped (and why: no overlap, no qualifying rep, ambiguous match)
-- One line per draft: `[Account] → [Partner Co] / [Rep name]`
-- Any tool errors
-
-Don't repeat full email bodies in the summary — they're in the drafts.
 
 ## Recurring runs
 
@@ -287,7 +262,7 @@ This works well as a weekly cadence (e.g., Monday mornings, catching the prior w
 
 ## Guardrails
 
-- Drafts only. Never send email.
+- Drafts only. 
 - Only surface partner data that Crossbeam's sharing rules already expose to this user — never speculate about partner data you can't see.
 - Deal amounts and account lists are sensitive; keep them out of any output that isn't going to the user themselves.
 
