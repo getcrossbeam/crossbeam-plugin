@@ -45,25 +45,15 @@ Connected data is preferred — it is the right tool for any pipeline filter and
 - A reciprocity source (a field, a sheet, or a note tracking what you owe each partner and what they owe you) — lets the draft reference the running give-and-get
 - Other GTM skills you have installed — a sales playbook, an ICP or buying-center skill, your voice skill. If present, this skill reads them so the play and the wording match how your team sells.
 
-## Before your first run: what to configure
+## Optional configuration (set once, runs every time)
 
-### 1. Account or deal source
-Where accounts and deals come from — a report or filter, a data export, or a pasted list. Connected data is preferred (pipeline filters and your-side contacts).
+Everything below can be left blank — the skill works out of the box and asks at runtime for what it needs.
 
-### 2. Buying-center map (optional, sharpens the play)
-The roles that make a complete buying committee for your sale. The skill compares partner contacts and your contacts against this to name the gap a partner can fill.
+**Buying-center map** — the roles that make a complete buying committee for your sale. The skill uses this to name the gap a partner can fill. If blank, it infers from context.
 
-> **Fill in before sharing:** `Buying center: [e.g. economic buyer (CRO/CFO), champion (VP Sales), technical eval (RevOps), procurement]`
+**Strategic partner tags** — Tier 1 or co-sell partners to weight up so their plays surface first. Leave blank for all partners.
 
-### 3. Strategic partner tags (optional)
-Tier 1 or co-sell partners to weight up so their plays surface first.
-
-> **Fill in before sharing:** `Strategic partner tags: [e.g. Tier 1, Co-Sell — or leave blank for all partners]`
-
-### 4. Reciprocity source (optional)
-Where give-and-get balance per partner lives, if anywhere. Leave blank if not tracked.
-
-> **Fill in before sharing:** `Reciprocity source: [e.g. Salesforce field, a Google Sheet, a note — or blank]`
+**Reciprocity source** — where give-and-get balance per partner lives. Leave blank if not tracked.
 
 ## Defaults (all adjustable)
 
@@ -131,9 +121,8 @@ How the plays map to the play classification in Step 3:
 - The reciprocal give is the AMM reciprocal cell — reciprocal influence on, or a lead into, one of your customers the partner wants — **P25**.
 
 ## Configuration
-> Set once by whoever deploys this skill. The agent reads these at runtime — do not change them mid-conversation.
+> Optional defaults set by whoever deploys this skill. All fields can be left blank — the agent asks at runtime for anything not configured here.
 
-**Account or deal source:** [fill in — report/filter, data export, or "user will paste"]
 **Buying center (optional):** [fill in — roles that make a complete buying committee for your sale]
 **Strategic partner tags (optional):** [fill in — e.g. Tier 1, Co-Sell. Leave blank for all partners.]
 **Reciprocity source (optional):** [fill in — where give/get balance per partner lives, or blank]
@@ -261,22 +250,14 @@ Ask the user to confirm; let them drop any line where the partner, rep, or play 
 
 **What the gate blocks, precisely.** Sending anything is a hard stop: never send, even if a send tool exists. Copy-ready text in chat is not a send, so you may show it in the same turn — but the confirmation summary must appear **above** the drafts, so the user reads who each one is addressed to before they copy anything. Never present drafts with the recipient list buried below them or omitted.
 
-**Default delivery:** produce all drafts as copy-ready text in chat, one block per account with recipient, subject, and body. For a Coordinate play, include the Deal Navigator link.
+**Default delivery:** produce all drafts as copy-ready text in chat unless otherwise prompted, one block per account with recipient, subject, and body. For a Coordinate play, include the Deal Navigator link.
 
 Subject lines — vary, pick the most specific:
 - `[Account]: can you help us reach [stakeholder]?`
 - `[Account] — we are both in, worth aligning?`
 - `Quick hand on [Account]?`
 
-## Step 9 — Report
 
-Compact summary:
-- Accounts scanned / drafts created / accounts skipped, with the reason (no partner / not shared by partner / below floor / no incremental value / no qualifying rep)
-- One line per draft: `[Account] -> [Partner] / [Rep name] · Play: [type] · Give: [account or none]`
-- Accounts below the floor or with no incremental value listed separately so the user sees what was deliberately not asked and why
-- Any tool errors
-
-Do not repeat full email bodies — they are in the drafts.
 
 ## Guardrails
 
