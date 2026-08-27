@@ -42,7 +42,7 @@ Crossbeam Ecosystem Signals stand on their own — real partner deal activity is
 
 **For signals to appear, your partner must:**
 
-- **Have a CRM connected to Crossbeam**
+- **Have a data source connected to Crossbeam**
 - **Be syncing and sharing the following fields with you:**
   - **Deal open date**
   - **Deal close date**
@@ -53,45 +53,29 @@ Crossbeam Ecosystem Signals stand on their own — real partner deal activity is
 
 **To receive contact information on signals, your partner must also:**
 
-- **Be syncing and sharing CRM contact data**
+- **Be syncing and sharing contact data**
 
 **If contact data is included, signals may contain:**
 
 - **Contact Name**
 - **Contact Title**
 
-## Setup: what to configure before your first run
+## Setup
 
-**Step 1 — Connect Crossbeam**
-Connect from your tool's connector directory or at crossbeam.com. Authenticate to the right org.
+**Connect Crossbeam**
+Connect from your tool's connector directory or at crossbeam.com. Authenticate to the right org. That's all that's required — the skill works out of the box from there.
 
-**Step 2 — Define your account source**
-Fill in where your account list comes from and how it will be pulled. This is your starting list — Ecosystem Signals layer on top to show which accounts have active partner motion. Be specific: name the source, the segment or filter you're using, and how the agent should access it (e.g. via a connected CRM connector, a manual CSV upload, a named account list you'll paste in).
+## Optional configuration (set once, runs every time)
 
-> **Fill in before sharing:** `Account source: [e.g. "Open opportunities in Salesforce, Enterprise segment, pulled via Salesforce connector" or "Top 300 prospect accounts — will paste as a list" or "Named account list uploaded as CSV"]`
+Everything below can be left blank. The skill asks at runtime for anything it needs and applies sensible defaults.
 
-**Step 3 — Set your signal lookback window**
-How far back should the scanner look for partner activity on each account? Set this based on your typical sales cycle and how fresh you want the signals to be. A shorter window (30 days) keeps results focused on what's moving right now. A longer window (60–90 days) is better for enterprise deals that move slowly or where you want to catch signals you may have missed.
+**Signal lookback window** — how far back to look for partner activity. Default: 30 days. Shorter windows (30 days) stay focused on what's moving now; longer (60–90 days) catch signals in slower enterprise cycles.
 
-> **Fill in before sharing:** `Signal lookback window: [e.g. 30 days / 60 days / 90 days]`
+**Strategic partner tags** — filter signals to specific partner tiers or co-sell partners. Leave blank to include all partners.
 
-**Step 4 — Set your Crossbeam partner tags (optional)**
-By default the scanner picks up signals from every partner you're connected to in Crossbeam. That's useful for broad coverage — but if you have a defined set of strategic or co-sell partners whose signals matter most for pipeline, filtering to their tags keeps the output focused on the relationships that are most likely to move deals. This is worth configuring if you have tiered partner programs, active co-sell motions, or specific ISV relationships your sales team is already aligned on.
+**Output destination** — where the ranked list is delivered. Default: in-chat.
 
-> **Fill in before sharing:** `Strategic partner tags: [e.g. Tier 1, Co-Sell — or leave blank to include all partners]`
-
-**Step 5 — Set your output destination**
-Decide where the ranked list gets delivered. Think about who needs to see it and in what format.
-
-> **Fill in before sharing:** `Output destination: [e.g. in-chat / Slack channel / Google Doc / slide deck / other]`
-
-**Step 6 — Set your volume confirmation threshold (optional)**
-If your account list is large, this sets the point at which the scanner pauses and asks you to confirm before scanning. It is worth setting if you are pointing the skill at a broad segment and want to avoid accidentally running across thousands of accounts on a first try. Leave it blank for no limit.
-
-> **Fill in before sharing:** `Volume confirmation threshold: [e.g. 100 accounts — or leave blank for no limit]`
-
-**Step 7 — Run it once and adjust**
-After a first run, ask your assistant to help you refine the scoring weights, change the lookback window, or trim the output format to what your team actually reads.
+**Volume confirmation threshold** — how many accounts to scan before pausing for confirmation. Useful if you're pointing the skill at a broad segment. Leave blank for no limit.
 
 ## How to run it
 
@@ -129,20 +113,18 @@ All partner data comes from what your partners have shared with you in Crossbeam
 
 # Skill Instructions
 
-Scans a configured list of accounts against Crossbeam's ecosystem intelligence and signals, ranks by signal strength, and surfaces accounts worth acting on. One output: a ranked list with signal summaries, plus optional outreach angles.
+Scans a list of accounts against Crossbeam's ecosystem intelligence and signals, ranks by signal strength, and surfaces accounts worth acting on. One output: a ranked list with signal summaries, plus optional outreach angles.
 
 ---
 
 ## Configuration
-> These values are set once by whoever deploys this skill. The agent reads them at runtime — do not change them mid-conversation.
+> Optional defaults set by whoever deploys this skill. All fields can be left blank — the agent asks at runtime for anything not configured here.
 
-**Account source:** [fill in — name the source, the segment or filter, and how the agent should access it. e.g. "My open opportunities, Enterprise segment" or "Top 300 prospect accounts" or "Named account list"]
+**Signal lookback window (optional):** [fill in — how far back to look for partner activity. e.g. 30 days / 60 days / 90 days. Default: 30 days.]
 
-**Signal lookback window:** [fill in — how far back to look for partner activity. e.g. 30 days / 60 days / 90 days]
+**Strategic partner tags (optional):** [fill in — e.g. Tier 1, Co-Sell. Leave blank to include all partners.]
 
-**Strategic partner tags (optional):** [fill in — e.g. Tier 1, Co-Sell. Configure this if you have a tiered partner program or active co-sell motions and want signals filtered to those relationships. Leave blank to include all partners.]
-
-**Output destination:** [fill in — e.g. in-chat / Slack channel / Google Doc / slide deck / other]
+**Output destination (optional):** [fill in — e.g. in-chat / Slack channel / Google Doc. Default: in-chat.]
 
 **Volume confirmation threshold (optional):** [fill in — e.g. 100 accounts. The agent pauses and confirms before scanning if the list exceeds this. Leave blank for no limit.]
 
@@ -154,7 +136,9 @@ Crossbeam MCP is required. The scanner works with Crossbeam alone. For a more co
 
 ## Step 1 — Get the account list
 
-Get the account list from the configured account source. If no source is configured, stop and tell the user they need to define or share one source or connector before running — do not pull from any source automatically.
+If the user has not provided an account list in their prompt, ask once: "What accounts should I scan? You can paste a list, name a segment or filter, or describe the set you want." Do not pull from any source automatically.
+
+If Signal lookback window is not configured, default to 30 days. If Output destination is not configured, default to in-chat.
 
 If the list exceeds the configured volume confirmation threshold, stop and tell the user how many accounts were found and ask them to confirm before proceeding.
 
@@ -176,13 +160,13 @@ Accepts `account_domain`, `account_name` (fuzzy), or `account_id`. Domain is the
 
 **2b — Get partner overlap**
 ```
-find_overlap_partners(account_id: "<record_id>", limit: 100)
+find_overlapping_partners(account_id: "<record_id>", limit: 100)
 ```
 **Always pass `limit`.** The tool defaults to `limit: 10`, so an account overlapping more partners than that silently returns only the first page, with no error and no truncation flag. Pass `limit: 100` and paginate with `page` until the partner list is complete.
 
 If strategic partner tags are configured, filter in the same call — this tool takes the tag directly, so no second call and no manual intersect is needed:
 ```
-find_overlap_partners(account_id: "<record_id>", partner_tag_name: "<tag>", limit: 100)
+find_overlapping_partners(account_id: "<record_id>", partner_tag_name: "<tag>", limit: 100)
 ```
 An ambiguous tag returns `ClarificationRequired` with candidates; resolve it once at the start of the scan and reuse the confirmed `partner_tag_id` for every remaining account rather than re-prompting per account.
 
