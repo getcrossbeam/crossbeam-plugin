@@ -24,7 +24,7 @@ Turn your partner ecosystem into a ranked prospecting list: who to work now, why
 2. Pulls your prospects that sit in those partners' customer and open-deal populations — the **EQLs**
 3. **Excludes accounts you already sell to**, keeps net-new prospects as the prime list, and flags any that are already open deals in your pipeline
 4. Scores and ranks for fit, so you work the strongest signal first rather than reading a raw overlap dump
-5. Enriches each lead with the *why* — which partner, customer or live deal — and **flags where Crossbeam already has contacts**, including net-new buyers you don't have in your CRM
+5. Enriches each lead with the *why* — which partner, customer or live deal — and **flags where Crossbeam already has contacts**, including net-new buyers not yet in your records
 6. Gives a per-account angle and the warm path, and skips accounts a partner is mid-deal on
 7. Hands the list, and optional first-touch drafts, to your MAP or sequencer
 
@@ -36,20 +36,19 @@ Read-only and draft-only. The list and drafts are produced for you to review; th
 - **Crossbeam connector** — the source of partner overlap and contact data. Connect from your tool's connector directory or at crossbeam.com. Authenticate to the right org first. The skill will not run without it.
 
 **For the prospect population — any one of these works**
-- A description ("my whole prospect base", "enterprise prospects in DACH", "accounts in my territory")
+- A description ("prospects", "enterprise prospects in DACH", "accounts in my territory"). 
 - A pasted list of companies to vet for ecosystem signal
-- A CRM report or filter, or your Crossbeam prospect population
+- A report or filter, or your Crossbeam prospect population
 
 **Optional but recommended**
 - **Partner tags in Crossbeam** that group partners by integration surface, tier, or theme (e.g. a tag for the partners your product plugs into) — these let the skill pick the right pool automatically
-- A CRM or warehouse connector — for segment/territory resolution and to know what you already own
-- A MAP or sequencer connector — to hand the list and drafts off directly
+- A destination for the list and drafts (a MAP or sequencer you'll push to manually, or chat output)
 - Other GTM skills you have installed — an ICP or persona skill, a sales playbook, your voice skill — so ranking and angles match how your team sells
 
 ## Before your first run: what to configure
 
 ### 1. Prospect source
-Where your prospects come from — a CRM filter, a warehouse query, your Crossbeam prospect population, or a pasted list.
+Where your prospects come from, for examplem, a report or filter, your Crossbeam prospect population, or a pasted list.
 
 ### 2. ICP definition (sharpens ranking)
 What a good-fit account looks like, so EQL strength is weighted by fit, not just ecosystem presence.
@@ -67,9 +66,9 @@ Accounts never to prospect — your own partners and your investors — so a rep
 > **Fill in before sharing:** `Exclude: [partner accounts, investor accounts — or blank]`
 
 ### 5. Destination (optional)
-Where the list should go — a MAP, a sequencer, a CSV, or just the chat.
+Where the list should go — a MAP, a sequencer, or just the chat.
 
-> **Fill in before sharing:** `Destination: [e.g. a named MAP/sequencer, CSV, or chat]`
+> **Fill in before sharing:** `Destination: [e.g. a named MAP/sequencer, or chat]`
 
 ## Defaults (all adjustable)
 
@@ -89,13 +88,13 @@ Where the list should go — a MAP, a sequencer, a CSV, or just the chat.
 
 - **Launch a product:** "Find me leads for our [product] launch" — the skill anchors on the partners that product plugs into
 - **Top of funnel:** "Who should I prospect this week?"
-- **Vet a list:** "Which of these accounts have ecosystem signal? [paste]"
+- **Vet a list:** "Which of these accounts have recent Ecosystem Signals? [paste]"
 - **By partner:** "Which of my prospects are customers of [partner]?"
-- **Segment / territory:** "Best ecosystem-qualified prospects in my enterprise territory"
+- **Segment / territory:** "Best ecosystem-qualified prospects in my enterprise territory" 
 
 ## A note on the data
 
-All partner data comes from what your partners have shared with you in Crossbeam under your sharing rules. The skill only surfaces what is already visible to you, never guesses at data a partner has not shared, and never sends or pushes anything without your review.
+All partner data comes from what your partners have shared with you in Crossbeam, according to your sharing rules. The skill only surfaces what would be visible to you in Crossbeam, never guesses at data a partner has not shared, and never sends or pushes anything without your review.
 
 </readme>
 
@@ -125,46 +124,46 @@ Implements ELG plays P7, P8, P11, and P12. Play records and the foundations subs
 ## Configuration
 > Set once by whoever deploys this skill. The agent reads these at runtime — do not change them mid-conversation.
 
-**Prospect source:** [fill in — CRM filter, warehouse query, Crossbeam prospect population, or "user will paste"]
+**Prospect source:** [fill in — report/filter, Crossbeam prospect population, or "user will paste"]
 **ICP:** [fill in — what a good-fit account looks like]
 **Anchor partners / partner tag (optional):** [fill in — partners or a tag whose customers fit the product. Blank = infer from the prompt.]
 **Exclusions (recommended):** [fill in — your own partner accounts and investor accounts; never prospect these]
-**Destination (optional):** [fill in — MAP/sequencer, CSV, or chat]
+**Destination (optional):** [fill in — MAP/sequencer or chat]
 **Your company / product name:** [fill in — your own product, e.g. the name your reps use for it]
 
 ## Verified tool surface
 
 Confirm exact names/params against the connected server on the first call. Tools observed in production:
-- `find_overlaps` — account lists by population intersection. `our_segments` filters YOUR side; the `partners` arg takes either an array of partner specs (each with `id`/`name` + `segments`) or an EcosystemFilter (`tag_name`/`tag_id`, `segments`, `partner_scores`). Returns each account's `partner_names`/`partner_segments` (the PARTNER's segment) and a `total_count`. **The row does not say which of YOUR segments the account is in** — see Step 3. Large reports may return `RetryLater`; fuzzy names return `ClarificationRequired`, and a named partner that doesn't exist returns `is_no_match: true`.
-- `find_overlap_partners` — partners that share a given account; supports `partner_tag_name`. Use to confirm which partners carry a tag.
-- `find_partner_contacts` — partner-shared contacts at an account, with priority-role `insights` and an `in_own_crm` flag. One call per account.
+- `find_overlapping_accounts_and_leads` — account lists. Use when the answer is a list of accounts. `our_segments`/`our_populations` filters YOUR side; the `partners` arg takes either an array of partner specs (each with `id`/`name` + `segments`) or an EcosystemFilter (`tag_name`/`tag_id`, `segments`, `partner_scores`). Returns each account's `partner_names`/`partner_segments` (the PARTNER's segment) and a `total_count`. **The row does not say which of YOUR segments the account is in** — see Step 3. Large reports may return `RetryLater` with `retry_after_seconds`; fuzzy names return `ClarificationRequired`, and a named partner that doesn't exist returns `is_no_match: true`. `pagination.has_more` is authoritative for pagination — when false and `total_count` exceeds rows received, the plan capped the result.
+- `find_overlapping_partners` — partners that share a given account, sorted by partner-level metrics such as `partner_score` or `deal_size_with_partner`; supports `partner_tag_name`. Use when the answer is a list of partners. Use to confirm which partners carry a tag.
+- `find_partner_shared_contacts` — partner-shared contacts at an account, ranked by EI recommendation score; sorted by priority-role signals, then key_contact signals, then data completeness; with priority-role `insights` and an `in_own_crm` flag. One call per account.
 - `find_partner_recommendations` — EI-recommended partners + `ei_signals` for a named deal/account.
-- `find_new_accounts` — pipeline-generation accounts: companies your partners sell to that you could go after. `pipeline_type` classifies each row — `net_new` (absent from your CRM entirely), `prospect` (in one of your prospect populations, overlaps a partner's customers, no open opp), `not_in_my_populations` (in your CRM but in no population, usually a population-rule gap). Supports `partner_names`/`partner_ids`, `partner_tag_name`/`partner_tag_id`, and `sort_by`. **The tag argument WIDENS rather than narrows:** combined with `partner_names`/`partner_ids` it returns accounts for partners matching *either* filter, not both. So a tag plus a named pool pulls in partners outside that pool. To restrict to an intersection, pass one filter and discard non-members yourself. **This is the only tool that reaches true net-new whitespace — `find_overlaps` cannot.**
+- `find_new_accounts` — pipeline-generation accounts: companies your partners sell to that you could go after. `pipeline_type` classifies each row — `net_new` (absent from your records entirely), `prospect` (in one of your prospect populations, overlaps a partner's customers, no open opp), `not_in_my_populations` (in your data but in no population, usually a population-rule gap). Supports `partner_names`/`partner_ids`, `partner_tag_name`/`partner_tag_id`, and `sort_by`. **The tag argument WIDENS rather than narrows:** combined with `partner_names`/`partner_ids` it returns accounts for partners matching *either* filter, not both. So a tag plus a named pool pulls in partners outside that pool. To restrict to an intersection, pass one filter and discard non-members yourself. **This is the only tool that reaches true net-new whitespace — `find_overlapping_accounts_and_leads` cannot.**
 - `search_crossbeam_knowledge` — ELG/product/blog content.
 
 No ecosystem-activity / signal tool is guaranteed present — Step 8 degrades to an on-demand re-scan.
 
-This skill is **read-only**: it produces a ranked list and optional drafts; the push/send happens in the company's own MAP, sequencer, or CRM.
+This skill is **read-only**: it produces a ranked list and optional drafts; the push/send happens in the company's own MAP, sequencer, or other tools.
 
 ## Step 0 — Inventory tools
 
-Confirm the Crossbeam MCP is connected and authenticated; if not, stop and say so. Note whether a CRM/warehouse, a MAP/sequencer, and any GTM skills (ICP/persona, playbook, voice) are present — each is used when available, never hard-depended on.
+Confirm the Crossbeam MCP is connected and authenticated; if not, stop and say so. Note whether a sales or marketing tool, a MAP/sequencer, and any GTM skills (ICP/persona, playbook, voice) are present — each is used when available, never hard-depended on.
 
 ## Step 1 — Select the anchor pools (the judgment that beats a raw dump)
 
 Do **not** default to "all partners, sort by overlap breadth" — that floats megacorps with many partners to the top and buries fit. Instead, pick the partner pools whose customers are the best leads for what's being prospected:
 
 1. **Read the prompt for the product/goal.** "Leads for our [X] launch" → the partners that relate to X.
-2. **Prefer a partner tag.** If a tag groups the relevant partners (e.g. an integration-surface tag, a tier, a theme), anchor on it: pass `partners: { tag_name: "<tag>", segments: ["customers","open_opportunities"] }` to `find_overlaps`. Confirm a fuzzy tag with the user (or enumerate members via `find_overlap_partners(partner_tag_name=...)`) so the report is transparent about *which* partners it used and *why*.
+2. **Prefer a partner tag.** If a tag groups the relevant partners (e.g. an integration-surface tag, a tier, a theme), anchor on it: pass `partners: { tag_name: "<tag>", segments: ["customers","open_opportunities"] }` to `find_overlapping_accounts_and_leads`. Confirm a fuzzy tag with the user (or enumerate members via `find_overlapping_partners(partner_tag_name=...)`) so the report is transparent about *which* partners it used and *why*.
 3. **Named partners.** If the user names partners, resolve them. If a named partner returns `is_no_match` (not in the ecosystem), **say so plainly** — do not silently drop it. ("X and Y aren't partners in your Crossbeam ecosystem; anchoring on the ones that are.")
 4. **Fallback.** No tag or names → anchor on strategic-tagged or high-`partner_score` partners, and/or weight by ICP fit in Step 4. State the basis.
 
-Resolve the prospect population in parallel: CRM/warehouse when connected, else the Crossbeam **prospects** population; a pasted list is vetted directly.
+Resolve the prospect population in parallel: connected data when available, else the Crossbeam **prospects** population; a pasted list is vetted directly.
 
 ## Step 2 — Pull the EQL pool (customers excluded)
 
 ```
-find_overlaps(
+find_overlapping_accounts_and_leads(
   list_name: "<product> launch leads — <anchor> customers that are our prospects",
   our_segments: ["prospects"],
   partners: <anchor set with segments: ["customers","open_opportunities"]>,
@@ -176,22 +175,14 @@ Excluding `customers` from `our_segments` drops accounts you already sell to (lo
 
 ## Step 3 — Label the our-side segment (add the open-opp pass)
 
-`find_overlaps` returns the partner's segment, not yours, so a single call can't tell a prospect from an open opp on your side. Step 2 already pulled the `our_segments: ["prospects"]` pass — **that result is your prime lead list; do not re-query it here.** Make one additional call to separate the in-motion accounts:
+`find_overlapping_accounts_and_leads` returns the partner's segment, not yours, so a single call can't tell a prospect from an open opp on your side. Step 2 already pulled the `our_segments: ["prospects"]` pass — **that result is your prime lead list; do not re-query it here.** Make one additional call to separate the in-motion accounts:
 - **Pass A (prospects)** — reuse the Step 2 result as-is → the prime lead list.
 - **Pass B (open opps)** — repeat the Step 2 call with `our_segments: ["open_opportunities"]` (same `partners` anchor set) → accounts already in your pipeline.
 Label Pass A as prime; flag anything in Pass B as **already-in-motion** (lower priority, or hand to crossbeam-co-sell-copilot). Default the lead list to prospects only.
 
-**Net-new-to-CRM whitespace needs a different tool.** `find_overlaps` is an *intersection*: it only
-returns accounts already in your CRM/populations, so it can never surface an account a partner has
-that you have never entered. Do not imply an overlap list contains net-new names.
+**Net-new whitespace needs a different tool.** `find_overlapping_accounts_and_leads` is an *intersection*: it only returns accounts already in your connected data or populations, so it can never surface an account a partner has that you have never entered. Do not imply an overlap list contains net-new names.
 
-That whitespace *is* reachable — just not here. `find_new_accounts` with `pipeline_type: "net_new"`
-returns a partner's customers that are absent from your CRM entirely. When the user asks for
-genuinely new names, call it rather than reframing the overlap list, and say which tool each part of
-the answer came from. Carry these caveats: `net_new` rows have no `account_id`, so `domain` is the
-key; free plans return only the first page; and an empty result has several possible causes (no
-partner sharing greenfield data, plan tier, owner-scoped access, or a rebuild lag of 2–24 hours), so
-hedge rather than telling the user they have no net-new accounts.
+That whitespace *is* reachable — just not here. `find_new_accounts` with `pipeline_type: "net_new"` returns a partner's customers that are entirely absent from your records. When the user asks for genuinely new names, call it rather than reframing the overlap list, and say which tool each part of the answer came from. Carry these caveats: `net_new` rows have no `account_id`, so `domain` is the key; free plans return only the first page; and an empty result has several possible causes (no partner sharing greenfield data, plan tier, owner-scoped access, or a rebuild lag of 2–24 hours), so hedge rather than telling the user they have no net-new accounts.
 
 ## Step 4 — Score and rank (the value over a raw overlap dump)
 
@@ -212,7 +203,7 @@ Rank highest-first and tier (A/B/C). Never present an unranked dump.
 
 For the **top N ranked** (not the whole list — one call per account):
 ```
-find_partner_contacts(account_id|account_name, partner_id: <anchor partner>)
+find_partner_shared_contacts(account_id|account_name, partner_id: <anchor partner>)
 ```
 Per account, flag:
 - **Contacts available?** Y/N and count.
@@ -248,12 +239,12 @@ Works as a weekly "who's new / who heated up" pass. Offer once to schedule after
 
 ## Guardrails
 
-- Read-only and draft-only. The Crossbeam MCP exposes `find_*` / `get_*` tools only. Produce the list and drafts; the push/send happens in the company's own MAP, sequencer, or CRM. Never push or send automatically.
+- Read-only and draft-only. The Crossbeam MCP exposes `find_*` / `get_*` tools only. Produce the list and drafts; the push/send happens in the company's own MAP, sequencer, or other tools. Never push or send automatically.
 - Value over a raw lookup is the point: select the pool deliberately, label the segment, score and rank, enrich the *why*, flag contacts, give an angle. Never hand back an unranked overlap dump — that is what the MCP already does.
 - Exclude what you already sell to (customers) and what you must not prospect (your partners, your investors).
 - Only surface partner data Crossbeam's sharing rules already expose. Absence of data is not absence of overlap — say "not shared by the partner," never "no overlap."
 - Never cold-prospect into an account a partner is actively working — flag for co-sell.
-- Net-new-to-CRM whitespace is out of `find_overlaps`' reach (intersection only). Reach it with `find_new_accounts` (`pipeline_type: "net_new"`), and never imply an overlap list already contains it.
+- Net-new whitespace is out of `find_overlapping_accounts_and_leads`' reach (intersection only). Reach it with `find_new_accounts` (`pipeline_type: "net_new"`), and never imply an overlap list already contains it.
 - Every angle rests on a real better-together truth. Proof points persuade only, always attributed, never invented.
 - Generic and vendor-neutral. No publisher-internal product or skill names. The Crossbeam brand (skill name, "powered by Crossbeam"), Crossbeam MCP tool names, and public case-study companies are fine — the shared interface and public proof every installer has.
 - Prospect lists and partner data are sensitive — keep them out of any output not going to the user.
